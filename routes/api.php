@@ -12,11 +12,11 @@ use App\Http\Controllers\ScheduleController;
 */
 
 Route::get('/', function () {
-    return response()->json(['message' => 'Welcome to the API']);
+    return redirect('/api/documentation');
 });
 
 // Movie routes
 Route::apiResource('movies', MovieController::class);
 
 // Schedule routes
-Route::apiResource('schedules', ScheduleController::class); 
+Route::apiResource('schedules', ScheduleController::class);
