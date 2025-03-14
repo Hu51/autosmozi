@@ -1,0 +1,513 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Movie Theater API",
+        "description": "API for managing movies and schedules in a theater",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost",
+            "description": "Local Environment"
+        }
+    ],
+    "paths": {
+        "/api/movies": {
+            "get": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "List all movies",
+                "operationId": "a7859dc5cd106bbeae5492e22df893ec",
+                "responses": {
+                    "200": {
+                        "description": "List of all movies",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Movie"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Create a new movie",
+                "operationId": "a303e8fe5382b02a193fa994ebef739f",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "description",
+                                    "age_rating",
+                                    "language",
+                                    "cover_image"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "maxLength": 100
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "age_rating": {
+                                        "type": "string",
+                                        "maxLength": 10
+                                    },
+                                    "language": {
+                                        "type": "string",
+                                        "maxLength": 2
+                                    },
+                                    "cover_image": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Movie created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Movie"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/movies/{id}": {
+            "get": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Get a specific movie",
+                "operationId": "a7031f1ec2eb856acbdd7f7054ed001d",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Movie ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Movie details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Movie"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Movie not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Update a movie",
+                "operationId": "aea46ecba0a2c9a86915ba24cbc23184",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Movie ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "title": {
+                                        "type": "string",
+                                        "maxLength": 100
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "maxLength": 255
+                                    },
+                                    "age_rating": {
+                                        "type": "string",
+                                        "maxLength": 10
+                                    },
+                                    "language": {
+                                        "type": "string",
+                                        "maxLength": 2
+                                    },
+                                    "cover_image": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Movie updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Movie"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Movie not found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Movies"
+                ],
+                "summary": "Delete a movie",
+                "operationId": "7c85892d3135ddee915cb902bd61b7f4",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Movie ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Movie deleted successfully"
+                    },
+                    "404": {
+                        "description": "Movie not found"
+                    }
+                }
+            }
+        },
+        "/api/schedules": {
+            "get": {
+                "tags": [
+                    "Schedules"
+                ],
+                "summary": "List all schedules",
+                "operationId": "c2791edf6c0550c67fac652cad98e09e",
+                "responses": {
+                    "200": {
+                        "description": "List of all schedules",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Schedule"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Schedules"
+                ],
+                "summary": "Create a new schedule",
+                "operationId": "cec681726db3f091faae4410db8ee14c",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "date",
+                                    "time",
+                                    "available_seats",
+                                    "movie_id"
+                                ],
+                                "properties": {
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "time": {
+                                        "type": "string",
+                                        "format": "time"
+                                    },
+                                    "available_seats": {
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "movie_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Schedule created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Schedule"
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            }
+        },
+        "/api/schedules/{id}": {
+            "get": {
+                "tags": [
+                    "Schedules"
+                ],
+                "summary": "Get a specific schedule",
+                "operationId": "da250e6293de88a6bb2201d3d53ebe82",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Schedule ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Schedule details",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Schedule"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Schedule not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Schedules"
+                ],
+                "summary": "Update a schedule",
+                "operationId": "4c279651026a64cbbce8be66901a368a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Schedule ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "date": {
+                                        "type": "string",
+                                        "format": "date"
+                                    },
+                                    "time": {
+                                        "type": "string",
+                                        "format": "time"
+                                    },
+                                    "available_seats": {
+                                        "type": "integer",
+                                        "minimum": 0
+                                    },
+                                    "movie_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Schedule updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Schedule"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Schedule not found"
+                    },
+                    "422": {
+                        "description": "Validation error"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Schedules"
+                ],
+                "summary": "Delete a schedule",
+                "operationId": "0c464af4e687525872f4eb274eac5d7c",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Schedule ID",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Schedule deleted successfully"
+                    },
+                    "404": {
+                        "description": "Schedule not found"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Movie": {
+                "required": [
+                    "title",
+                    "description",
+                    "age_rating",
+                    "language",
+                    "cover_image"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "title": {
+                        "type": "string",
+                        "maxLength": 100
+                    },
+                    "description": {
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "age_rating": {
+                        "type": "string",
+                        "maxLength": 10
+                    },
+                    "language": {
+                        "type": "string",
+                        "maxLength": 2
+                    },
+                    "cover_image": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            },
+            "Schedule": {
+                "required": [
+                    "date",
+                    "time",
+                    "available_seats",
+                    "movie_id"
+                ],
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "time": {
+                        "type": "string",
+                        "format": "time"
+                    },
+                    "available_seats": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "movie_id": {
+                        "type": "integer"
+                    },
+                    "movie": {
+                        "$ref": "#/components/schemas/Movie"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Movies",
+            "description": "API Endpoints for managing movies"
+        },
+        {
+            "name": "Schedules",
+            "description": "API Endpoints for managing movie schedules"
+        }
+    ]
+}

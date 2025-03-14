@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS autosmozi;
+GRANT ALL PRIVILEGES ON autosmozi.* TO 'autosmozi'@'%';
+FLUSH PRIVILEGES; 
