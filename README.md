@@ -9,12 +9,12 @@ Update composer packages
 `composer update`
 `docker compose up --build`
 
-Run migration in docker:
-`php artisan migrate --seed`
-
-
 Copy **.env.example** to **.env**
 And update **.env** and **docker-compose.yml**
+
+
+Run migration in docker:
+`php artisan migrate --seed`
 
 
 ### API Documentation
