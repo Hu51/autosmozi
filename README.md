@@ -2,12 +2,20 @@
 
 ## Install
 
-- git pull https://github.com/Hu51/autosmozi
-- composer update
+Clone repository:
+`git pull https://github.com/Hu51/autosmozi`
 
-- docker compose up --build
-- docker compose exec php php artisan migrate --seed
+Update composer packages
+`composer update`
+`docker compose up --build`
+
+Run migration in docker:
+`php artisan migrate --seed`
+
+
+Copy **.env.example** to **.env**
+And update **.env** and **docker-compose.yml**
 
 
 ### API Documentation
-- http://localhost/api/documentation
+http://localhost/api/documentation
